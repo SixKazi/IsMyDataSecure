@@ -208,7 +208,7 @@ public class FirstFragment extends Fragment {
 
                     }
                     mWebsiteAdapter = new WebsiteAdapter(getContext(), mWebsiteList);
-                    warning.setText("WARNING! Action Needed \n" + mWebsiteList.size() + " matches found.");
+                    warning.setText("WARNING! Action Needed \n" + mWebsiteList.size() + " matches found!");
                     warning.setTextColor(Color.RED);
                     getHelp.setVisibility(View.VISIBLE);
                     mRecyclerView.setAdapter(mWebsiteAdapter);
