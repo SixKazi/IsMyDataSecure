@@ -31,7 +31,10 @@ import com.nulabinc.zxcvbn.*;
 
 public class SecondFragment extends Fragment {
 
-    public TextView result;
+    public TextView result1;
+    public TextView result2;
+    public TextView result3;
+    public TextView result4;
     public EditText input;
     String pUrl = "https://api.pwnedpasswords.com/range/";
     String pHash;
@@ -51,7 +54,10 @@ public class SecondFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        result = view.findViewById(R.id.resultPw);
+        result1 = view.findViewById(R.id.resultPw);
+        result2 = view.findViewById(R.id.resultPw2);
+        result3 = view.findViewById(R.id.resultPw3);
+        result4 = view.findViewById(R.id.resultPw4);
         send = view.findViewById(R.id.button_mnemonic);
 
 
@@ -73,6 +79,8 @@ public class SecondFragment extends Fragment {
 
                 //code to alter layout based on password strength/ toggles for
                 pwAPI(m.toString());
+                Strength s = Zxcvbn(m.toString());
+                result2.setText(s.getCrackTimesDisplay().getOfflineFastHashing1e10PerSecond());
 
             }
         });
@@ -158,7 +166,7 @@ public class SecondFragment extends Fragment {
     }
 
     public void pwAPI(String m){
-        if(m.length() > 6 ){
+        if(m.length()>0){
             RequestQueue queue = Volley.newRequestQueue(requireContext());
             StringBuilder s = new StringBuilder();
             s.append(pUrl);
@@ -181,12 +189,12 @@ public class SecondFragment extends Fragment {
                     //Log.d("# of matches: ","" + ((MainActivity)getActivity()).passwordSearcher(responseArray,pHash));
                     int j = ((MainActivity)getActivity()).passwordSearcher(responseArray,pHash);
                     if(j != -1) {
-                        result.setText("" + j);
-                        result.setTextColor(Color.RED);
+                        result1.setText("" + j);
+                        result1.setTextColor(Color.RED);
                     }
                     else {
-                        result.setText("No Match!");
-                        result.setTextColor(Color.GREEN);
+                        result1.setText("No Match!");
+                        result1.setTextColor(Color.GREEN);
                     }
                 }
             }, new Response.ErrorListener() {

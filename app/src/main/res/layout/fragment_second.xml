@@ -10,6 +10,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/pwInput"
+        android:layout_marginTop="50dp"
         android:layout_width="250dp"
         android:layout_height="50dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -20,6 +21,7 @@
 
         <EditText
             android:id="@+id/mnemonicInput"
+
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:hint="@string/mnemonic"
@@ -40,27 +42,48 @@
         android:text="@string/search"
 
         app:layout_constraintTop_toBottomOf="@+id/pwInput" />
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
     <TextView
         android:id="@+id/resultPw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
+
         android:textSize="20dp"
-        android:text="Password Requires  "
+        android:text="1. Requirements  "
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_mnemonic"
-        android:gravity="center_horizontal" />
+ />>
 
     <TextView
         android:id="@+id/resultPw2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:text="Password Requires  "
+        android:text="2. Feedback  "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resultPw" />
+    <TextView
+        android:id="@+id/resultPw3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="2. Feedback  "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resultPw2" />
+    <TextView
+        android:id="@+id/resultPw4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="3. Crack Time  "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resultPw3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
