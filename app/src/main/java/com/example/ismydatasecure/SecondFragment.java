@@ -27,6 +27,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import com.nulabinc.zxcvbn.*;
 
 public class SecondFragment extends Fragment {
 
@@ -52,6 +53,7 @@ public class SecondFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         result = view.findViewById(R.id.resultPw);
         send = view.findViewById(R.id.button_mnemonic);
+
 
 
         input = view.findViewById(R.id.mnemonicInput);
@@ -122,9 +124,9 @@ public class SecondFragment extends Fragment {
 
 
     }
-    public String passwordGen(String s){
-        String pw = "";
-        String[] firstLetter = s.split(" ");
+    public Strength Zxcvbn(String s){
+        Strength pw;
+        /*String[] firstLetter = s.split(" ");
         for (int i=0;i<firstLetter.length;i++){
              pw += firstLetter[i];
         }
@@ -134,8 +136,9 @@ public class SecondFragment extends Fragment {
 
 
             pw.indexOf(i);
-        }
-
+        }*/
+        Zxcvbn zxcvbn = new Zxcvbn();
+        pw = zxcvbn.measure(s);
 
         return pw;
     }

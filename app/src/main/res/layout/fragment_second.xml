@@ -6,37 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".SecondFragment">
 
-    <ImageView
-        android:id="@+id/emailIcon"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:padding="5dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_password_foreground"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/pw_text1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/emailIcon"
-        android:text="Passwords will be automatically\n searched once over 5 characters"/>
-
-    <TextView
-        android:id="@+id/resultPw"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="..."
-        android:textSize="40dp"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pw_text1"
-        android:gravity="center_horizontal" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/pwInput"
@@ -45,7 +15,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:passwordToggleEnabled="true"
-        app:layout_constraintTop_toBottomOf="@id/resultPw"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
         <EditText
@@ -70,16 +40,27 @@
         android:text="@string/search"
 
         app:layout_constraintTop_toBottomOf="@+id/pwInput" />
-
+    <TextView
+        android:id="@+id/resultPw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:text="Password Requires  "
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_mnemonic"
+        android:gravity="center_horizontal" />
 
     <TextView
         android:id="@+id/resultPw2"
         android:layout_width="match_parent"
-        android:layout_height="231dp"
-        android:text="Results"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="Password Requires  "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_mnemonic" />
+        app:layout_constraintTop_toBottomOf="@+id/resultPw" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
