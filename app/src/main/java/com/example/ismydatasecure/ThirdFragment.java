@@ -34,8 +34,7 @@ public class ThirdFragment extends Fragment {
     public EditText input;
     String pUrl = "https://api.pwnedpasswords.com/range/";
     String pHash;
-    Button send;
-    ImageButton show;
+
 
     @Override
     public View onCreateView(
@@ -51,7 +50,6 @@ public class ThirdFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         result = view.findViewById(R.id.resultPw);
-        send = view.findViewById(R.id.button_mnemonic);
 
 
         input = view.findViewById(R.id.mnemonicInput);
@@ -76,48 +74,7 @@ public class ThirdFragment extends Fragment {
         });
 
 
-        send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RequestQueue queue = Volley.newRequestQueue(v.getContext());
-                StringBuilder s = new StringBuilder();
-                s.append(pUrl);
-                try {
-                    pHash = AeSimpleSHA1.SHA1(input.getText().toString());
-                    Log.d("hash = ",pHash);
 
-                } catch (NoSuchAlgorithmException e) {
-                    e.printStackTrace();
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-                s.append(pHash.substring(0, 5));
-                Log.d("site: ", s.toString());
-                StringRequest passwordRequest = new StringRequest(Request.Method.GET, s.toString(), new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        String responseArray[] = response.split("\\r?\\n");
-                        Log.d("Array size: ", "" + responseArray.length);
-                        Log.d("# of matches: ","" + ((MainActivity)getActivity()).passwordSearcher(responseArray,pHash));
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("error",error.toString());
-                    }
-                }
-
-
-                );
-
-                queue.add(passwordRequest);
-
-
-                //     NavHostFragment.findNavController(FirstFragment.this)
-                //      .navigate(R.id.action_FirstFragment_to_SecondFragment);
-
-            }
-        });
 
 
 

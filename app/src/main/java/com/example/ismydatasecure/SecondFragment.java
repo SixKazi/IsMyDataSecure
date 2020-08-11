@@ -38,8 +38,6 @@ public class SecondFragment extends Fragment {
     public EditText input;
     String pUrl = "https://api.pwnedpasswords.com/range/";
     String pHash;
-    Button send;
-    ImageButton show;
 
     @Override
     public View onCreateView(
@@ -58,7 +56,6 @@ public class SecondFragment extends Fragment {
         result2 = view.findViewById(R.id.resultPw2);
         result3 = view.findViewById(R.id.resultPw3);
         result4 = view.findViewById(R.id.resultPw4);
-        send = view.findViewById(R.id.button_mnemonic);
 
 
 
@@ -80,54 +77,13 @@ public class SecondFragment extends Fragment {
                 //code to alter layout based on password strength/ toggles for
                 pwAPI(m.toString());
                 Strength s = Zxcvbn(m.toString());
-                result2.setText(s.getCrackTimesDisplay().getOfflineFastHashing1e10PerSecond());
+                result2.setText("Time to Crack: \n" + s.getCrackTimesDisplay().getOnlineNoThrottling10perSecond());
+                result3.setText("Suggestions: \n" + s.getFeedback().getSuggestions().toString());
+
 
             }
         });
 
-
-        send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RequestQueue queue = Volley.newRequestQueue(v.getContext());
-                StringBuilder s = new StringBuilder();
-                s.append(pUrl);
-                try {
-                    pHash = AeSimpleSHA1.SHA1(input.getText().toString());
-                    Log.d("hash = ",pHash);
-
-                } catch (NoSuchAlgorithmException e) {
-                    e.printStackTrace();
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-                s.append(pHash.substring(0, 5));
-                Log.d("site: ", s.toString());
-                StringRequest passwordRequest = new StringRequest(Request.Method.GET, s.toString(), new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        String responseArray[] = response.split("\\r?\\n");
-                        Log.d("Array size: ", "" + responseArray.length);
-                        Log.d("# of matches: ","" + ((MainActivity)getActivity()).passwordSearcher(responseArray,pHash));
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("error",error.toString());
-                    }
-                }
-
-
-                );
-
-                queue.add(passwordRequest);
-
-
-                //     NavHostFragment.findNavController(FirstFragment.this)
-                //      .navigate(R.id.action_FirstFragment_to_SecondFragment);
-
-            }
-        });
 
 
 
@@ -151,17 +107,19 @@ public class SecondFragment extends Fragment {
         return pw;
     }
 
-    public boolean password_Validation(String password)
+    public String password_Validation(String password)
     {
-        {
+        StringBuilder s = new StringBuilder();
+        s.append("Password Contains");
+
             Pattern letter = Pattern.compile("[a-zA-z]");
             Pattern digit = Pattern.compile("[0-9]");
             Pattern special = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
             Matcher hasLetter = letter.matcher(password);
             Matcher hasDigit = digit.matcher(password);
             Matcher hasSpecial = special.matcher(password);
-            return hasLetter.find() && hasDigit.find() && hasSpecial.find();
-        }
+            return s.toString();
+
 
     }
 
@@ -189,12 +147,10 @@ public class SecondFragment extends Fragment {
                     //Log.d("# of matches: ","" + ((MainActivity)getActivity()).passwordSearcher(responseArray,pHash));
                     int j = ((MainActivity)getActivity()).passwordSearcher(responseArray,pHash);
                     if(j != -1) {
-                        result1.setText("" + j);
-                        result1.setTextColor(Color.RED);
+                        result1.setText("Leaked Online: " + j);
                     }
                     else {
-                        result1.setText("No Match!");
-                        result1.setTextColor(Color.GREEN);
+
                     }
                 }
             }, new Response.ErrorListener() {
