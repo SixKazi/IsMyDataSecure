@@ -78,7 +78,7 @@ public class SecondFragment extends Fragment {
                 pwAPI(m.toString());
                 Strength s = Zxcvbn(m.toString());
                 result2.setText("Time to Crack: \n" + s.getCrackTimesDisplay().getOnlineNoThrottling10perSecond());
-                result3.setText("Suggestions: \n" + s.getFeedback().getSuggestions().toString());
+                result3.setText("Issues: \n" + s.getFeedback().getWarning());
 
 
             }
