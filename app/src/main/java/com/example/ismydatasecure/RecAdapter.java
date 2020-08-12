@@ -1,6 +1,7 @@
 package com.example.ismydatasecure;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,7 +70,7 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.RecViewHolder> {
 
             title.setText(tip.getTitle());
             category.setText(tip.getCategory());
-            info.setText(tip.getInfo());
+            info.setText(Html.fromHtml(tip.getInfo()));
         }
     }
 }

@@ -47,7 +47,15 @@ public class ThirdFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         tipList = new ArrayList<>();
-        tipList.add(new Tip("Test Tip","Test Category","TEST"));
+        String tip1 = "Gmail ignores after the plus character (+) allowing the text afterward to be used for filtering and generating infinite amounts of alternate accounts which direct to the same inbox.\\n\" +\n" +
+                "                \"E.g. test+spam@gmail.com, test+123@gmail.com, test+shopping@gmail.com will all deliver to the mailbox test@gmail.com \\n\" +\n" +
+                "                \"Dots in the email address are also completely ignored, therefore test@gmail.com and t.e.s.t@gmail.com are the same inbox.\\n\" +\n" +
+                "                \"This is also true for test@gmail.com and test@googlemail.com. It does not matter if you use Gmail or Googlemail.\\n";
+        tipList.add(new Tip("Test Tip","Test Category","Gmail ignores after the plus character (+) allowing the text afterward to be used for filtering and generating infinite amounts of alternate accounts which direct to the same inbox.\n" +
+                "E.g. test+spam@gmail.com, test+123@gmail.com, test+shopping@gmail.com will all deliver to the mailbox test@gmail.com \n" +
+                "Dots in the email address are also completely ignored, therefore test@gmail.com and t.e.s.t@gmail.com are the same inbox.\n" +
+                "This is also true for test@gmail.com and test@googlemail.com. It does not matter if you use Gmail or Googlemail.\n"));
+
 
         mRecyclerview = view.findViewById(R.id.tip_view);
         mRecyclerview.setHasFixedSize(true);
