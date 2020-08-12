@@ -34,10 +34,6 @@ import java.util.regex.Pattern;
 
 public class ThirdFragment extends Fragment {
 
-    private RecyclerView mRecyclerview;
-    private RecAdapter recAdapter;
-    private ArrayList<Tip> tipList;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -46,22 +42,18 @@ public class ThirdFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        tipList = new ArrayList<>();
-        String tip1 = "Gmail ignores after the plus character (+) allowing the text afterward to be used for filtering and generating infinite amounts of alternate accounts which direct to the same inbox.\\n\" +\n" +
-                "                \"E.g. test+spam@gmail.com, test+123@gmail.com, test+shopping@gmail.com will all deliver to the mailbox test@gmail.com \\n\" +\n" +
-                "                \"Dots in the email address are also completely ignored, therefore test@gmail.com and t.e.s.t@gmail.com are the same inbox.\\n\" +\n" +
-                "                \"This is also true for test@gmail.com and test@googlemail.com. It does not matter if you use Gmail or Googlemail.\\n";
-        tipList.add(new Tip("Test Tip","Test Category","Gmail ignores after the plus character (+) allowing the text afterward to be used for filtering and generating infinite amounts of alternate accounts which direct to the same inbox.\n" +
-                "E.g. test+spam@gmail.com, test+123@gmail.com, test+shopping@gmail.com will all deliver to the mailbox test@gmail.com \n" +
-                "Dots in the email address are also completely ignored, therefore test@gmail.com and t.e.s.t@gmail.com are the same inbox.\n" +
-                "This is also true for test@gmail.com and test@googlemail.com. It does not matter if you use Gmail or Googlemail.\n"));
+        ArrayList<Tip> tipList = new ArrayList<>();
+        tipList.add(new Tip("Email Aliasing with the + Symbol","Email, Tip","<p>Gmail &amp; Outlook ignores anything after the plus character (<strong>+</strong>) allowing the text afterwards to be used for filtering and generating infinite amounts of alternate accounts which direct to the same inbox.</p>\n" +
+                "<p><em><strong>test+spam@gmail.com</strong>, <u><strong>test+123@gmail.com</strong></u></em><em>&nbsp;&amp;</em><strong>&nbsp;test+shopping@gmail.com</strong><em>&nbsp;will all be deliver to the mailbox <strong>test@gmail.com</strong></em></p>\n" +
+                "<p>Dots (<strong>.</strong>) are also completely ignored, therefore <strong>test@gmail.com</strong> and<strong>&nbsp;t.e.s.t@gmail.com</strong> are also the same inbox.</p>\n" +
+                "<p>Using this technique for creating different email address aliases for different accounts can lead to higher account security</p>"));
 
 
-        mRecyclerview = view.findViewById(R.id.tip_view);
+        RecyclerView mRecyclerview = view.findViewById(R.id.tip_view);
         mRecyclerview.setHasFixedSize(true);
         mRecyclerview.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        recAdapter = new RecAdapter(getContext(),tipList);
+        RecAdapter recAdapter = new RecAdapter(getContext(), tipList);
         mRecyclerview.setAdapter(recAdapter);
 
 
