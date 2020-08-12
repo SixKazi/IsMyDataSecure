@@ -77,7 +77,6 @@ public class FirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         emailAddress = view.findViewById(R.id.emailInput);
-        icon = view.findViewById(R.id.emailIcon);
         //responseOutput = view.findViewById(R.id.result);
         buttonEmail = (Button)view.findViewById(R.id.button_first);
         mRecyclerView = view.findViewById(R.id.result);

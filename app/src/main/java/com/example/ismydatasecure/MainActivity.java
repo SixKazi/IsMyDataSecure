@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 case 1:
                     return "PASSWORD";
                 case 2:
-                    return "HELP";
+                    return "TIPS";
             }
             return null;
         }

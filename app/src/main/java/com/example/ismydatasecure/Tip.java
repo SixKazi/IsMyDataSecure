@@ -5,6 +5,7 @@ public class Tip {
     private String category;
     private String info;
     private String logo;
+    private boolean expanded;
 
     public Tip(String title, String category, String info) {
         this.title = title;
@@ -44,4 +45,12 @@ public class Tip {
     public void setLogo(String logo) {
         this.logo = logo;
     }
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
+    }
+
+    public boolean isExpanded() {
+        return expanded;
+    }
+
 }
