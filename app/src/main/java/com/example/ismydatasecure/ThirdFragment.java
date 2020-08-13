@@ -34,6 +34,7 @@ import java.util.regex.Pattern;
 
 public class ThirdFragment extends Fragment {
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -42,8 +43,8 @@ public class ThirdFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ArrayList<Tip> tipList = new ArrayList<>();
-        tipList.add(new Tip("Email Aliasing with the + Symbol","<strong>Email, Tip</strong>","<p>Gmail &amp; Outlook ignores anything after the plus character (<strong>+</strong>) allowing the text afterwards to be used for filtering and generating infinite amounts of alternate accounts which direct to the same inbox.</p>\n" +
+        final ArrayList<Tip> tipList = new ArrayList<>();
+        tipList.add(new Tip("Email Aliasing with the + Symbol","<strong>Email, Tips</strong>","<p>Gmail &amp; Outlook ignores anything after the plus character (<strong>+</strong>) allowing the text afterwards to be used for filtering and generating infinite amounts of alternate accounts which direct to the same inbox.</p>\n" +
                 "<p><em><strong>test+spam@gmail.com</strong>, <u><strong>test+123@gmail.com</strong></u></em><em>&nbsp;&amp;</em><strong>&nbsp;test+shopping@gmail.com</strong><em>&nbsp;will all be deliver to the mailbox <strong>test@gmail.com</strong></em></p>\n" +
                 "<p>Dots (<strong>.</strong>) are also completely ignored, therefore <strong>test@gmail.com</strong> and<strong>&nbsp;t.e.s.t@gmail.com</strong> are also the same inbox.</p>\n" +
                 "<p>Using this technique for creating different email address aliases for different accounts can lead to higher account security</p>"));
@@ -66,13 +67,21 @@ public class ThirdFragment extends Fragment {
                 "<p style=\"margin-left: 20px;\">If you&#39;re a particularly fast texter, you don&#39;t need to shorten the mnemonic, and your password can be the entire sentence, spaces and all.&nbsp;</p>\n" +
                 "<p style=\"margin-left: 20px;\">e.g. &quot;My girlfriend made me sign up 2 this and I&#39;m not happy.&quot;&nbsp;</p>"));
 
-
         RecyclerView mRecyclerview = view.findViewById(R.id.tip_view);
         mRecyclerview.setHasFixedSize(true);
         mRecyclerview.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        RecAdapter recAdapter = new RecAdapter(getContext(), tipList);
+        final RecAdapter recAdapter = new RecAdapter(getContext(), tipList);
         mRecyclerview.setAdapter(recAdapter);
+        recAdapter.setOnItemClickListener(new RecAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                boolean expanded = tipList.get(position).isExpanded();
+                tipList.get(position).setExpanded(!expanded);
+                recAdapter.notifyItemChanged(position);
+
+            }
+        });
 
 
     }
