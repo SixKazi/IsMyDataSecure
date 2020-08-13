@@ -35,6 +35,7 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.RecViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 boolean expanded = tip.isExpanded();
                 tip.setExpanded(!expanded);
                 RecAdapter.this.notifyItemChanged(position);
@@ -53,6 +54,7 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.RecViewHolder> {
         private TextView category;
         private TextView info;
         private View subItem;
+        private TextView sub_info;
 
         public RecViewHolder(View itemView) {
             super(itemView);
@@ -61,6 +63,7 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.RecViewHolder> {
             category = itemView.findViewById(R.id.sub_item_category);
             info = itemView.findViewById(R.id.sub_item_info);
             subItem = itemView.findViewById(R.id.sub_item);
+            sub_info = itemView.findViewById(R.id.sub_item_info);
         }
 
         private void bind(Tip tip) {
@@ -69,7 +72,7 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.RecViewHolder> {
             subItem.setVisibility(expanded ? View.VISIBLE : View.GONE);
 
             title.setText(tip.getTitle());
-            category.setText(tip.getCategory());
+            category.setText(Html.fromHtml(tip.getCategory()));
             info.setText(Html.fromHtml(tip.getInfo()));
         }
     }

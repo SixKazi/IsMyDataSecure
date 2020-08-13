@@ -24,7 +24,12 @@
         android:textColor="#000"
         android:textSize="22sp"
         tools:text="Tip Title" />
-
+    <TextView
+        android:id="@+id/sub_item_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        tools:text="Category: Email, Password, Tip, Info" />
     <LinearLayout
         android:id="@+id/sub_item"
         android:layout_width="match_parent"
@@ -32,16 +37,10 @@
         android:layout_marginTop="16dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/sub_item_category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            tools:text="Category: Email, Password, Tip, Info" />
+
 
         <TextView
             android:id="@+id/sub_item_info"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
