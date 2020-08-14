@@ -30,6 +30,7 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         tools:text="Category: Email, Password, Tip, Info" />
+
     <LinearLayout
         android:id="@+id/sub_item"
         android:layout_width="match_parent"

@@ -25,7 +25,6 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.RecViewHolder> {
         mListener = listener;
     }
 
-
     public RecAdapter(Context context, List<Tip> list) {
         mContext = context;
         this.list = list;
@@ -42,15 +41,6 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.RecViewHolder> {
         final Tip tip = list.get(position);
 
         holder.bind(tip);
-        /*holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                boolean expanded = tip.isExpanded();
-                tip.setExpanded(!expanded);
-                RecAdapter.this.notifyItemChanged(position);
-            }
-        }); */
     }
 
     @Override

@@ -5,6 +5,7 @@ public class WebsiteItem {
     private String mTitle;
     private int mPwncount;
     private String mDate;
+    private boolean expanded;
 
 
 
@@ -46,5 +47,13 @@ public class WebsiteItem {
 
     public void setmPwncount(int mPwncount) {
         this.mPwncount = mPwncount;
+    }
+
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
+    }
+
+    public boolean isExpanded() {
+        return expanded;
     }
 }
