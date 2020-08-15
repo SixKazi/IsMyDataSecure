@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,17 +34,22 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ThirdFragment extends Fragment {
-
+public SearchView search;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_third, container, false);
+
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final ArrayList<Tip> tipList = new ArrayList<>();
+
+        search = view.findViewById(R.id.search_bar);
+
+
         tipList.add(new Tip("Email Aliasing with the + Symbol","<strong>Email, Tips</strong>","<p>Gmail &amp; Outlook ignores anything after the plus character (<strong>+</strong>) allowing the text afterwards to be used for filtering and generating infinite amounts of alternate accounts which direct to the same inbox.</p>\n" +
                 "<p><em><strong>test+spam@gmail.com</strong>, <u><strong>test+123@gmail.com</strong></u></em><em>&nbsp;&amp;</em><strong>&nbsp;test+shopping@gmail.com</strong><em>&nbsp;will all be deliver to the mailbox <strong>test@gmail.com</strong></em></p>\n" +
                 "<p>Dots (<strong>.</strong>) are also completely ignored, therefore <strong>test@gmail.com</strong> and<strong>&nbsp;t.e.s.t@gmail.com</strong> are also the same inbox.</p>\n" +
@@ -87,9 +93,24 @@ public class ThirdFragment extends Fragment {
 
         final RecAdapter recAdapter = new RecAdapter(getContext(), tipList);
         mRecyclerview.setAdapter(recAdapter);
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                recAdapter.getFilter().filter(newText);
+
+                return false;
+            }
+        });
         recAdapter.setOnItemClickListener(new RecAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                ((MainActivity)getActivity()).hideKeyboard();
+
                 boolean expanded = tipList.get(position).isExpanded();
                 tipList.get(position).setExpanded(!expanded);
                 recAdapter.notifyItemChanged(position);

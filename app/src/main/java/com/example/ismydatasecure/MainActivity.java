@@ -1,5 +1,6 @@
 package com.example.ismydatasecure;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -15,6 +16,8 @@ import android.util.Log;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_search) {
             return true;
         }
 
@@ -109,6 +112,13 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
     }
-
+    public void hideKeyboard() {
+        // Check if no view has focus:
+        View view = MainActivity.this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager inputManager = (InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
 
     }

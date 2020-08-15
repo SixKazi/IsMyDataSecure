@@ -35,6 +35,7 @@ public class SecondFragment extends Fragment {
     public TextView result2;
     public TextView result3;
     public TextView result4;
+    private View root;
     public EditText input;
     String pUrl = "https://api.pwnedpasswords.com/range/";
     String pHash;
@@ -56,6 +57,7 @@ public class SecondFragment extends Fragment {
         result2 = view.findViewById(R.id.resultPw2);
         result3 = view.findViewById(R.id.resultPw3);
         result4 = view.findViewById(R.id.resultPw4);
+        root = view.findViewById(R.id.root);
 
 
 
@@ -76,51 +78,35 @@ public class SecondFragment extends Fragment {
 
                 //code to alter layout based on password strength/ toggles for
                 pwAPI(m.toString());
+
                 Strength s = Zxcvbn(m.toString());
+                String score = "#636161";
+                switch(s.getScore()) {
+                    case 0 : score = "#ffffff";
+                    break;
+                    case 1 : score = "#eb7d7d";
+                    break;
+                    case 2 : score = "#e9d252";
+                    break;
+                    case 3 : score = "#b4ee7c";
+                    break;
+                    case 4 : score = "#64c95a";
+
+                }
+                root.setBackgroundColor(Color.parseColor(score));
                 result2.setText("Time to Crack: " + s.getCrackTimesDisplay().getOnlineNoThrottling10perSecond());
                 result3.setText("Issues: " + s.getFeedback().getWarning());
 
 
             }
         });
-
-
-
-
     }
     public Strength Zxcvbn(String s){
         Strength pw;
-        /*String[] firstLetter = s.split(" ");
-        for (int i=0;i<firstLetter.length;i++){
-             pw += firstLetter[i];
-        }
-        pw.toLowerCase();
-
-        for(int i=0;i<pw.length();i++){
-
-
-            pw.indexOf(i);
-        }*/
         Zxcvbn zxcvbn = new Zxcvbn();
         pw = zxcvbn.measure(s);
 
         return pw;
-    }
-
-    public String password_Validation(String password)
-    {
-        StringBuilder s = new StringBuilder();
-        s.append("Password Contains");
-
-            Pattern letter = Pattern.compile("[a-zA-z]");
-            Pattern digit = Pattern.compile("[0-9]");
-            Pattern special = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
-            Matcher hasLetter = letter.matcher(password);
-            Matcher hasDigit = digit.matcher(password);
-            Matcher hasSpecial = special.matcher(password);
-            return s.toString();
-
-
     }
 
     public void pwAPI(String m){
@@ -149,7 +135,7 @@ public class SecondFragment extends Fragment {
                     if(j != -1) {
                         result1.setText("Leaked Online: " + j);
                     }
-                    else result1.setText("0");
+                    else result1.setText(R.string.leakednone);
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -163,6 +149,7 @@ public class SecondFragment extends Fragment {
 
             queue.add(passwordRequest);
         }
+        else result1.setText(R.string.leakednone);
     }
 
 }

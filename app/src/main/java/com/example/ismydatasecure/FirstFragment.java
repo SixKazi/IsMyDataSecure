@@ -3,6 +3,7 @@ package com.example.ismydatasecure;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -61,6 +62,7 @@ public class FirstFragment extends Fragment {
     Button help;
     Button getHelp;
     Button newSearch;
+    Button share;
     public static FirstFragment getInstance(){
         return new FirstFragment();
     }
@@ -93,11 +95,24 @@ public class FirstFragment extends Fragment {
                 emailAddress.setText("");
                 newSearch.setVisibility(View.GONE);
                 getHelp.setVisibility(View.GONE);
+                share.setVisibility(View.GONE);
                 warning.setText("...");
                 warning.setTextColor(Color.BLACK);
             }
         });
 
+        share = view.findViewById(R.id.share);
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                String shareBody = "Uh oh. I searched " + emailAddress.getText().toString() + " using the 'Is My Data Secure?' app and found that it's been leaked " + mWebsiteList.size() + " times! Time to update passwords. Download the App to search for emails and passwords, and also tips to make you more secure!";
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Email Search");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(sharingIntent, "Share via"));
+            }
+        });
         help = view.findViewById(R.id.help_emailInput);
         help.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,7 +142,7 @@ public class FirstFragment extends Fragment {
         buttonEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                hideKeyboard();
+                ((MainActivity)getActivity()).hideKeyboard();
                 if(!isValidEmail(emailAddress.getText().toString())){
                     Toast toast = Toast.makeText(getContext(), "Please enter a valid E-mail", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.TOP,0,0);
@@ -167,6 +182,7 @@ public class FirstFragment extends Fragment {
                     warning.setTextColor(Color.RED);
                     getHelp.setVisibility(View.VISIBLE);
                     newSearch.setVisibility(View.VISIBLE);
+                    share.setVisibility(View.VISIBLE);
                     mRecyclerView.setAdapter(mWebsiteAdapter);
                     mWebsiteAdapter.setOnItemClickListener(new WebsiteAdapter.OnItemClickListener() {
                         @Override
@@ -213,13 +229,5 @@ public class FirstFragment extends Fragment {
 
     public static boolean isValidEmail(CharSequence target) {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
-    }
-    public void hideKeyboard() {
-        // Check if no view has focus:
-        View view = getActivity().getCurrentFocus();
-        if (view != null) {
-            InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-        }
     }
     }
