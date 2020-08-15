@@ -5,7 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SecondFragment">
+    <Button
+        android:id="@+id/help_pw"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
 
+        tools:text="Help"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -29,12 +36,10 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pw_text1"
-            app:passwordToggleEnabled="true" />
+            app:passwordToggleEnabled="true"
+            android:autofillHints="" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
 
     <TextView
         android:id="@+id/resultPw"
@@ -42,46 +47,50 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
 
-        android:text="Leaked Online: "
-        android:textSize="20dp"
+        tools:text="Leaked Online: "
+        android:textSize="20sp"
         android:layout_marginTop="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pwInput" />>
+        app:layout_constraintTop_toBottomOf="@+id/pwInput"
+        android:layout_marginStart="5dp" />
 
     <TextView
         android:id="@+id/resultPw2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:text="Time to Crack: "
+        android:textSize="20sp"
+        tools:text="Time to Crack: "
         android:layout_marginLeft="5dp"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resultPw" />
+        app:layout_constraintTop_toBottomOf="@+id/resultPw"
+        android:layout_marginStart="5dp" />
     <TextView
         android:id="@+id/resultPw3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
 
-        android:textSize="20dp"
-        android:text="Missing Characters: "
+        android:textSize="20sp"
+        tools:text="Missing Characters: "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resultPw2" />
+        app:layout_constraintTop_toBottomOf="@+id/resultPw2"
+        android:layout_marginStart="5dp" />
     <TextView
         android:id="@+id/resultPw4"
         android:layout_marginLeft="5dp"
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:text="Suggestions: "
+        android:textSize="20sp"
+        tools:text="Suggestions: "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resultPw3" />
+        app:layout_constraintTop_toBottomOf="@+id/resultPw3"
+        android:layout_marginStart="5dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

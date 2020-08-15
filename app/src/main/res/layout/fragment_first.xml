@@ -13,12 +13,11 @@
         app:layout_constraintStart_toStartOf="parent">
 
 
-
         <EditText
-            android:layout_marginTop="50dp"
             android:id="@+id/emailInput"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:hint="@string/emailDefault"
             android:inputType="textEmailAddress"
             android:lines="1"
@@ -36,10 +35,10 @@
             android:textColor="#fff"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/emailInput"
-            app:layout_constraintTop_toTopOf="@+id/emailInput"
-
             app:layout_constraintLeft_toRightOf="@id/emailInput"
-            app:layout_constraintStart_toEndOf="@+id/emailInput" />
+
+            app:layout_constraintStart_toEndOf="@+id/emailInput"
+            app:layout_constraintTop_toTopOf="@+id/emailInput" />
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -52,33 +51,41 @@
             android:id="@+id/result_warning"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="..."
             android:textAlignment="center"
             android:textSize="20dp"
-            android:text="..."
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_first"
-            android:gravity="center_horizontal" />
+            app:layout_constraintTop_toBottomOf="@id/button_first" />
 
         <Button
             android:id="@+id/help_emailInput"
-            android:layout_width="40dp"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:background="@drawable/round_button"
-            android:text="?"
-            android:textColor="#fff"
-            android:textSize="20dp"
+
+            android:text="Help"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/help_button"
-            android:visibility="gone"
             android:layout_width="wrap_content"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:text="Secure"
             app:layout_constraintBottom_toTopOf="@id/result"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/result_warning" />
+
+        <Button
+            android:id="@+id/new_button"
+            android:visibility="gone"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_baseline_refresh_24"
+            app:layout_constraintBottom_toTopOf="@id/result"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/result_warning" />
     </androidx.constraintlayout.widget.ConstraintLayout>

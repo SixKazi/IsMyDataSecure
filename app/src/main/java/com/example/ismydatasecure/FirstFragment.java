@@ -60,6 +60,7 @@ public class FirstFragment extends Fragment {
     TextView warning;
     Button help;
     Button getHelp;
+    Button newSearch;
     public static FirstFragment getInstance(){
         return new FirstFragment();
     }
@@ -77,14 +78,26 @@ public class FirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         emailAddress = view.findViewById(R.id.emailInput);
-        //responseOutput = view.findViewById(R.id.result);
-        buttonEmail = (Button)view.findViewById(R.id.button_first);
+        buttonEmail = view.findViewById(R.id.button_first);
         mRecyclerView = view.findViewById(R.id.result);
         warning = view.findViewById(R.id.result_warning);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         getHelp = view.findViewById(R.id.help_button);
+        newSearch = view.findViewById(R.id.new_button);
+        newSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mWebsiteList.clear();
+                emailAddress.setText("");
+                newSearch.setVisibility(View.GONE);
+                getHelp.setVisibility(View.GONE);
+                warning.setText("...");
+                warning.setTextColor(Color.BLACK);
+            }
+        });
+
         help = view.findViewById(R.id.help_emailInput);
         help.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,64 +135,6 @@ public class FirstFragment extends Fragment {
                 }
                 else {
                     parseJSON();
-                                                                                                       /* RequestQueue queue = Volley.newRequestQueue(view.getContext());
-                                                                                                        StringBuilder s = new StringBuilder();
-                                                                                                        s.append(url);
-                                                                                                        s.append(emailAddress.getText().toString());
-                                                                                                        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
-                                                                                                                (Request.Method.GET, s.toString(), null, new Response.Listener<JSONArray>() {
-
-                                                                                                                    @Override
-                                                                                                                    public void onResponse(JSONArray response) {
-                                                                                                                        // response
-                                                                                                                        Log.d("Response", response.toString());
-                                                                                                                        //Email email1 = new Email(emailAddress.getText().toString(),response);
-
-
-                                                                                                                        try {
-                                                                                                                            JSONObject first = response.getJSONObject(0);
-                                                                                                                            int i = 0;
-                                                                                                                            while(i < response.length()){
-                                                                                                                                responseOutput.append(response.getJSONObject(i).toString());
-                                                                                                                                i++;
-                                                                                                                            }
-                                                                                                                            responseOutput.append( first.toString());
-                                                                                                                        } catch (JSONException e) {
-                                                                                                                            e.printStackTrace();
-                                                                                                                        }
-                                                                                                                    }
-                                                                                                                },
-                                                                                                                new Response.ErrorListener()
-                                                                                                                {
-                                                                                                                    @Override
-                                                                                                                    public void onErrorResponse(VolleyError volleyError) {
-                                                                                                                        // error
-                                                                                                                        try {
-                                                                                                                            String responseBody = "";
-                                                                                                                           if(volleyError.networkResponse != null)  responseBody=  new String( volleyError.networkResponse.data, "utf-8" );
-                                                                                                                            JSONObject jsonObject = new JSONObject(responseBody);
-                                                                                                                        } catch ( JSONException e ) {
-                                                                                                                            //Handle a malformed json response
-                                                                                                                        } catch (UnsupportedEncodingException error){
-
-                                                                                                                        }
-                                                                                                                    }
-                                                                                                                }
-                                                                                                        ) {
-
-
-                                                                                                            @Override
-                                                                                                            public Map<String, String> getHeaders() throws AuthFailureError {
-                                                                                                                Map<String, String>  params = new HashMap<String, String>();
-                                                                                                                String headerName = "hibp-api-key";
-                                                                                                                params.put(headerName, key);
-
-                                                                                                                return params;
-                                                                                                            }
-                                                                                                        };
-                                                                                                        queue.add(jsonArrayRequest);*/
-                                                                                                        //     NavHostFragment.findNavController(FirstFragment.this)
-                                                                                                          //      .navigate(R.id.action_FirstFragment_to_SecondFragment);
             }
         }});
     }
@@ -202,15 +157,26 @@ public class FirstFragment extends Fragment {
                         int pwnCount = website.getInt("PwnCount");
                         String imageUrl = website.getString("LogoPath");
                         String date = website.getString("BreachDate");
+                        String text = website.getString("Description");
 
-                        mWebsiteList.add(new WebsiteItem(imageUrl,websiteTitle,pwnCount,date));
+                        mWebsiteList.add(new WebsiteItem(imageUrl,websiteTitle,pwnCount,date,text));
 
                     }
                     mWebsiteAdapter = new WebsiteAdapter(getContext(), mWebsiteList);
-                    warning.setText("WARNING! Action Needed \n" + mWebsiteList.size() + " matches found!");
+                    warning.setText(mWebsiteList.size() + " matches found. \n Act now to secure your data");
                     warning.setTextColor(Color.RED);
                     getHelp.setVisibility(View.VISIBLE);
+                    newSearch.setVisibility(View.VISIBLE);
                     mRecyclerView.setAdapter(mWebsiteAdapter);
+                    mWebsiteAdapter.setOnItemClickListener(new WebsiteAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            boolean expanded = mWebsiteList.get(position).isExpanded();
+                            mWebsiteList.get(position).setExpanded(!expanded);
+                            mWebsiteAdapter.notifyItemChanged(position);
+
+                        }
+                    });
 
 
 

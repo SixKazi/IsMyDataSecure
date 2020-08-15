@@ -77,8 +77,8 @@ public class SecondFragment extends Fragment {
                 //code to alter layout based on password strength/ toggles for
                 pwAPI(m.toString());
                 Strength s = Zxcvbn(m.toString());
-                result2.setText("Time to Crack: \n" + s.getCrackTimesDisplay().getOnlineNoThrottling10perSecond());
-                result3.setText("Issues: \n" + s.getFeedback().getWarning());
+                result2.setText("Time to Crack: " + s.getCrackTimesDisplay().getOnlineNoThrottling10perSecond());
+                result3.setText("Issues: " + s.getFeedback().getWarning());
 
 
             }
@@ -149,9 +149,7 @@ public class SecondFragment extends Fragment {
                     if(j != -1) {
                         result1.setText("Leaked Online: " + j);
                     }
-                    else {
-
-                    }
+                    else result1.setText("0");
                 }
             }, new Response.ErrorListener() {
                 @Override

@@ -6,15 +6,25 @@ public class WebsiteItem {
     private int mPwncount;
     private String mDate;
     private boolean expanded;
+    private String text;
 
 
 
-    public WebsiteItem(String mImageUrl, String mTitle, int mPwncount, String mDate) {
+    public WebsiteItem(String mImageUrl, String mTitle, int mPwncount, String mDate, String text) {
         this.mImageUrl = mImageUrl;
         this.mTitle = mTitle;
         this.mPwncount = mPwncount;
         this.mDate = mDate;
+        this.text = text;
 
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public String getmDate() {

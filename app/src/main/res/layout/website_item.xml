@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#FD5A4E"
+    android:background="#FFFFFF"
     android:orientation="vertical"
     android:paddingBottom="16dp"
     android:paddingEnd="16dp"
@@ -15,13 +15,15 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginBottom="16dp"
-        android:background="#D3D3D3" />
+        android:background="#000000" />
 
     <TextView
         android:id="@+id/title_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:textSize="22sp"
+
         tools:text="Title"
         android:textColor="@android:color/black" />
 
@@ -38,16 +40,14 @@
             android:id="@+id/pwncount_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-
-            tools:text="pwn"
+        android:textSize="18sp"
+        tools:text="pwn"
  />
         <TextView
             android:id="@+id/date_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-
+            android:textSize="18sp"
             tools:text="date"
  />
 

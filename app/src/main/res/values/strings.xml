@@ -9,7 +9,7 @@
     <string name="emailDefault">Enter Email Address</string>
     <string name="search">Search</string>
     <string name="passwordDefault">Enter Password</string>
-    <string name="mnemonic">Enter Password (5 Minimum)</string>
+    <string name="mnemonic">Check Password</string>
     <string name="tab_text_1">Check</string>
     <string name="tab_text_2">Home</string>
     <string name="title_activity_search">Search</string>

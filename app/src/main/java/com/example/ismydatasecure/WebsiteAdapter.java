@@ -59,6 +59,7 @@ public class WebsiteAdapter extends RecyclerView.Adapter<WebsiteAdapter.WebsiteV
         public TextView mTextViewTitle;
         public TextView mTextViewBlurb;
         public TextView mTextViewDate;
+        public TextView mText;
         public View subItem;
 
         public WebsiteViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
@@ -68,8 +69,9 @@ public class WebsiteAdapter extends RecyclerView.Adapter<WebsiteAdapter.WebsiteV
             mTextViewBlurb = itemView.findViewById(R.id.pwncount_view);
             mTextViewDate = itemView.findViewById(R.id.date_view);
             subItem = itemView.findViewById(R.id.sub_item);
+            mText = itemView.findViewById(R.id.sub_item_info);
 
-            mTextViewTitle.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (listener != null){
@@ -93,6 +95,7 @@ public class WebsiteAdapter extends RecyclerView.Adapter<WebsiteAdapter.WebsiteV
             Picasso.get().load(item.getmImageUrl()).fit().centerInside().into(mImageView);
             mTextViewBlurb.setText(item.getmPwncount() + " Leaked Accounts");
             mTextViewDate.setText(item.getmDate());
+            mText.setText(Html.fromHtml(item.getText()));
 
         }
     }
