@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,10 +28,13 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nulabinc.zxcvbn.*;
 
 public class SecondFragment extends Fragment {
 
+    public Fragment frag;
     public TextView result1;
     public TextView result2;
     public TextView result3;
@@ -58,6 +62,7 @@ public class SecondFragment extends Fragment {
         result3 = view.findViewById(R.id.resultPw3);
         result4 = view.findViewById(R.id.resultPw4);
         root = view.findViewById(R.id.root);
+        frag = this;
 
 
 

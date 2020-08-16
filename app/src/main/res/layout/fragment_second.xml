@@ -5,15 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SecondFragment"
+    android:tag="second"
     android:id="@+id/root">
-    <Button
-        android:id="@+id/help_pw"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-
-        android:text="Help"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
     <com.google.android.material.textfield.TextInputLayout
