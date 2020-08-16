@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.text.Html;
 import android.util.Log;
 
 import android.view.Menu;
@@ -22,6 +23,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -45,15 +48,22 @@ public class MainActivity extends AppCompatActivity {
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
                     builder1.setMessage("Search your email in data breaches leaked online");
                     builder1.setCancelable(true);
+                    builder1.setIcon(R.drawable.ic_email_foreground);
                     builder1.setTitle("Searching your Email");
                     AlertDialog alert11 = builder1.create();
                     alert11.show();
                 }
                 else if(viewPager.getCurrentItem() == 1){
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-                    builder1.setMessage("Search your email in data breaches leaked online");
+                    builder1.setMessage(Html.fromHtml("<p>Start typing a password to have real time statistics about its security.</p>\n" +
+                            "<p>Leaked Online: Number of times the password has been seen via Pwned Passwords data breach subset. If no matches could be found, it does <strong>not&nbsp;</strong>mean your password is safe, especially if its strength is poor.</p>\n" +
+                            "<p>Time to Crack: Estimated time the password would take to crack for password cracking software. This is not 100% accurate and only should be used for making sure your passwords are complex enough.</p>\n" +
+                            "<p>Suggestions/Issues: Any glaring issues with the password will be shown, as in pattern matching, common password usages and mild suggestions to improve. Please use the &#39;Tips&#39; section to learn about how to create strong passwords.</p>\n" +
+                            "<p>Data leak matching provided by Pwned Passwords API</p>\n" +
+                            "<p><br></p>"));
                     builder1.setCancelable(true);
-                    builder1.setTitle("Searching your Email");
+                    builder1.setIcon(R.drawable.ic_password_foreground);
+                    builder1.setTitle("Searching your Password");
                     AlertDialog alert11 = builder1.create();
                     alert11.show();
                 }
@@ -159,17 +169,7 @@ public class MainActivity extends AppCompatActivity {
             inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
     }
-    public Fragment getVisibleFragment(){
-        FragmentManager fragmentManager = MainActivity.this.getSupportFragmentManager();
-        List<Fragment> fragments = fragmentManager.getFragments();
-        if(fragments != null){
-            for(Fragment fragment : fragments){
-                if(fragment != null && fragment.isVisible())
-                    return fragment;
-            }
-        }
-        return null;
-    }
+
 
     public ArrayList genTips() {
 
@@ -228,18 +228,13 @@ public class MainActivity extends AppCompatActivity {
                 "<p>Suggestions/Issues: Any glaring issues with the password will be shown, as in pattern matching, common password usages and mild suggestions to improve. Please use the &#39;Tips&#39; section to learn about how to create strong passwords.</p>\n" +
                 "<p>Data leak matching provided by Pwned Passwords API</p>\n" +
                 "<p><br></p>"));
-        tipList.add(new Tip("What to do: Password Breach", "<strong>Password, Account, FAQ</strong>", "<p><strong>Verify</strong></p>\n" +
-                "<p>&nbsp;Verify what data has been leaked, making note of any passwords which may have been used on other accounts.</p>\n" +
-                "<p><strong>Protect</strong></p>\n" +
-                "<p>Change Passwords,&nbsp;</p>\n" +
-                "<p>Enable 2 Factor Authentication,&nbsp;</p>\n" +
-                "<p>If necessary, contact your bank to block bank account access</p>\n" +
-                "<p><strong>Monitor</strong></p>\n" +
-                "<p>Keep an eye for suspicious activity on your accounts</p>\n" +
-                "<p>Check emails regularly for any login attempts not from yourself</p>\n" +
-                "<p>Sign up to breach notification services for future leaks</p>\n" +
-                "<p><br></p>"));
 
+        Collections.sort(tipList, new Comparator<Tip>() {
+            @Override
+            public int compare(Tip o1, Tip o2) {
+                return o1.getCategory().compareToIgnoreCase(o2.getCategory());
+            }
+        });
         return tipList;
     }
 

@@ -1,8 +1,10 @@
 package com.example.ismydatasecure;
 
+import android.app.AlertDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,10 +41,11 @@ public class SecondFragment extends Fragment {
     public TextView result2;
     public TextView result3;
     public TextView result4;
-    private View root;
+    private TextView strength;
     public EditText input;
     String pUrl = "https://api.pwnedpasswords.com/range/";
     String pHash;
+    Button secure;
 
     @Override
     public View onCreateView(
@@ -61,8 +64,24 @@ public class SecondFragment extends Fragment {
         result2 = view.findViewById(R.id.resultPw2);
         result3 = view.findViewById(R.id.resultPw3);
         result4 = view.findViewById(R.id.resultPw4);
-        root = view.findViewById(R.id.root);
-        frag = this;
+        strength = view.findViewById(R.id.strength);
+        secure = view.findViewById(R.id.lock);
+        secure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+                builder1.setMessage(Html.fromHtml("<p><strong>How does my password get searched securely?</strong></p>\n" +
+                        "<p>Using <strong>K-Anonymity</strong>, your password does <strong>not&nbsp;</strong>get sent over the internet, making the search 100% safe to use.</p>\n" +
+                        "<p>For a full explanation of how K-Anonymity allows for safe searching, search in the <strong>Tips section.</strong></p>\n" +
+                        "<p><br></p>\n" +
+                        "<p><strong>Can hackers get my password from this app?</strong></p>\n" +
+                        "<p>Absolutely not. Your sensitive data does not get exposed online. This app saves no tracking or personal information.</p>"));
+                builder1.setCancelable(true);
+                builder1.setTitle("Secure Password Search");
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+            }
+        });
 
 
 
@@ -86,21 +105,29 @@ public class SecondFragment extends Fragment {
 
                 Strength s = Zxcvbn(m.toString());
                 String score = "#636161";
+                String str = "Strength";
                 switch(s.getScore()) {
-                    case 0 : score = "#ffffff";
+                    case 0 : score = "#000000";
+                    str = "UNSAFE";
                     break;
                     case 1 : score = "#eb7d7d";
+                    str = "WEAK";
                     break;
                     case 2 : score = "#e9d252";
+                    str = "OK";
                     break;
                     case 3 : score = "#b4ee7c";
+                    str = "GOOD";
                     break;
                     case 4 : score = "#64c95a";
+                    str = "SAFE";
 
                 }
-                root.setBackgroundColor(Color.parseColor(score));
-                result2.setText("Time to Crack: " + s.getCrackTimesDisplay().getOnlineNoThrottling10perSecond());
-                result3.setText("Issues: " + s.getFeedback().getWarning());
+                strength.setTextColor(Color.parseColor(score));
+                strength.setText(str);
+                result3.setText("Time to Crack: " + s.getCrackTimesDisplay().getOnlineNoThrottling10perSecond());
+                result4.setText("Notes: " + s.getFeedback().getWarning());
+                result4.append("" + s.getFeedback().getSuggestions().toString());
 
 
             }

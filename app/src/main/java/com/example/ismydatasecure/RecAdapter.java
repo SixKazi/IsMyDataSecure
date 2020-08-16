@@ -109,7 +109,7 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.RecViewHolder> {
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
                 for (Tip item : listFull) {
-                    if (item.getCategory().toLowerCase().contains(filterPattern)) {
+                    if (item.getCategory().toLowerCase().contains(filterPattern) || item.getTitle().toLowerCase().contains(filterPattern) || item.getInfo().toLowerCase().contains(filterPattern)) {
                         filteredList.add(item);
                     }
                 }

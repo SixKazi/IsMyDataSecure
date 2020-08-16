@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
@@ -63,6 +64,7 @@ public class FirstFragment extends Fragment {
     Button getHelp;
     Button newSearch;
     Button share;
+    Button secure;
     public static FirstFragment getInstance(){
         return new FirstFragment();
     }
@@ -100,7 +102,28 @@ public class FirstFragment extends Fragment {
                 warning.setTextColor(Color.BLACK);
             }
         });
-
+        secure = view.findViewById(R.id.help_button);
+        secure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+                builder1.setMessage(Html.fromHtml("<p><strong>Verify</strong></p>\n" +
+                        "<p>&nbsp;Verify what data has been leaked, making note of any passwords which may have been used on other accounts.</p>\n" +
+                        "<p><strong>Protect</strong></p>\n" +
+                        "<p>Change Passwords,&nbsp;</p>\n" +
+                        "<p>Enable 2 Factor Authentication,&nbsp;</p>\n" +
+                        "<p>If necessary, contact your bank to block bank account access</p>\n" +
+                        "<p><strong>Monitor</strong></p>\n" +
+                        "<p>Keep an eye for suspicious activity on your accounts</p>\n" +
+                        "<p>Check emails regularly for any login attempts not from yourself</p>\n" +
+                        "<p>Sign up to breach notification services for future leaks</p>\n" +
+                        "<p><br></p>"));
+                builder1.setCancelable(true);
+                builder1.setTitle("ACT NOW");
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+            }
+        });
         share = view.findViewById(R.id.share);
         share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,18 +134,6 @@ public class FirstFragment extends Fragment {
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Email Search");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
                 startActivity(Intent.createChooser(sharingIntent, "Share via"));
-            }
-        });
-        help = view.findViewById(R.id.help_emailInput);
-        help.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
-                builder1.setMessage("Search your email in data breaches leaked online");
-                builder1.setCancelable(true);
-                builder1.setTitle("Searching your Email");
-                AlertDialog alert11 = builder1.create();
-                alert11.show();
             }
         });
         mWebsiteList = new ArrayList<>();
