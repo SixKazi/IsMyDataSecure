@@ -13,7 +13,8 @@ import java.util.ArrayList;
 /*
 *  Class for Fragment Three; Tips
 * */
-
+//
+@SuppressWarnings({"ConstantConditions", "unchecked"})
 public class ThirdFragment extends Fragment {
 public SearchView search;
     @Override
@@ -48,6 +49,7 @@ public SearchView search;
         recAdapter.setOnItemClickListener(new RecAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                //noinspection ConstantConditions
                 ((MainActivity)getActivity()).hideKeyboard();
                 boolean expanded = tipList.get(position).isExpanded();
                 tipList.get(position).setExpanded(!expanded);
