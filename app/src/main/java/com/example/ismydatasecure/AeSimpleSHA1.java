@@ -3,6 +3,12 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/*
+*  Class to convert String to SHA1 hash.
+*  Used for Pwned Passwords API to hash
+*  the password input and prep for sending */
+
+
 public class AeSimpleSHA1 {
     private static String convertToHex(byte[] data) {
         StringBuilder buf = new StringBuilder();
