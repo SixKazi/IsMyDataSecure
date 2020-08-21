@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(viewPager.getCurrentItem() == 0){
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-                    builder1.setMessage("Search your email in data breaches leaked online");
+                    builder1.setMessage(Html.fromHtml("Search an email in data breaches leaked online"));
                     builder1.setCancelable(true);
                     builder1.setIcon(R.drawable.ic_email_foreground);
                     builder1.setTitle("Searching your Email");
