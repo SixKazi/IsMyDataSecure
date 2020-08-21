@@ -12,8 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 /*
 *  Class for Fragment Three; Tips
-* */
-//
+* Suppression for warnings on safe conditions
+*/
+
 @SuppressWarnings({"ConstantConditions", "unchecked"})
 public class ThirdFragment extends Fragment {
 public SearchView search;
