@@ -1,14 +1,11 @@
 package com.example.ismydatasecure;
 
-
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -16,18 +13,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -35,18 +29,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import static android.content.ContentValues.TAG;
-
+/*
+*
+*
+* */
 public class FirstFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private WebsiteAdapter mWebsiteAdapter;
@@ -54,7 +46,6 @@ public class FirstFragment extends Fragment {
     private RequestQueue mRequestQueue;
 
     Button buttonEmail;
-    TextView responseOutput;
     String url = "https://haveibeenpwned.com/api/v3/breachedaccount/";
     ImageView icon;
     String key = "53350b58873742d1b58ee5dda75cc6d6";

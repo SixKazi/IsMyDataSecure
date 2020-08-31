@@ -3,29 +3,21 @@ package com.example.ismydatasecure;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
 import android.text.Html;
-import android.util.Log;
-
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -109,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
     public int passwordSearcher(String[] list, String hash) {
         String prefix = hash.substring(0,5);
         int i = -1;
-
         for (String fullHash : list) {
             String checkHash = prefix + fullHash.substring(0, fullHash.indexOf(":"));
             //Log.d("passArray","pos "+j+" = "+checkHash);

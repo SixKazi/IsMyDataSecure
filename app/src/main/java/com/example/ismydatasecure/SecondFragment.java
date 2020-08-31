@@ -12,31 +12,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nulabinc.zxcvbn.*;
 
 public class SecondFragment extends Fragment {
 
-    public Fragment frag;
     public TextView result1;
     public TextView result2;
     public TextView result3;
@@ -89,12 +79,10 @@ public class SecondFragment extends Fragment {
         input.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
 
             @Override
@@ -102,7 +90,6 @@ public class SecondFragment extends Fragment {
 
                 //code to alter layout based on password strength/ toggles for
                 pwAPI(m.toString());
-
                 Strength s = Zxcvbn(m.toString());
                 String score = "#636161";
                 String str = "Strength";
