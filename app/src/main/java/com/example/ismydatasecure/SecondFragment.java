@@ -172,8 +172,3 @@ public class SecondFragment extends Fragment {
     }
 
 }
-
-/* TODO:
-    Implement GUI improvement for password strength (hsimp jquery? custom java?)
-    help button implementation for explanation of app features
-    tips implementation for help on how to improve security & create stronger passwords*/

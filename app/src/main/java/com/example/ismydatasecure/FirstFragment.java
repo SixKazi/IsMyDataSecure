@@ -47,7 +47,6 @@ public class FirstFragment extends Fragment {
 
     Button buttonEmail;
     String url = "https://haveibeenpwned.com/api/v3/breachedaccount/";
-    ImageView icon;
     String key = "53350b58873742d1b58ee5dda75cc6d6";
     EditText emailAddress;
     TextView warning;
@@ -56,9 +55,7 @@ public class FirstFragment extends Fragment {
     Button newSearch;
     Button share;
     Button secure;
-    public static FirstFragment getInstance(){
-        return new FirstFragment();
-    }
+
 
 
     @Override
