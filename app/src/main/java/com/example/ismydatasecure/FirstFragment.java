@@ -153,6 +153,8 @@ public class FirstFragment extends Fragment {
         }});
     }
 
+    // Main logic to query Have I Been Pwned API and display results
+
     public void parseJSON(){
         StringBuilder s = new StringBuilder();
         mWebsiteList.clear();

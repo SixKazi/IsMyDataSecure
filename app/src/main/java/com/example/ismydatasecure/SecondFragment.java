@@ -135,7 +135,7 @@ public class SecondFragment extends Fragment {
             s.append(pUrl);
             try {
                 pHash = AeSimpleSHA1.SHA1(input.getText().toString());
-                //Log.d("hash = ",pHash);
+                Log.d("hash = ",pHash);
 
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
@@ -148,8 +148,8 @@ public class SecondFragment extends Fragment {
                 @Override
                 public void onResponse(String response) {
                     String responseArray[] = response.split("\\r?\\n");
-                    //Log.d("Array size: ", "" + responseArray.length);
-                    //Log.d("# of matches: ","" + ((MainActivity)getActivity()).passwordSearcher(responseArray,pHash));
+                    Log.d("Array size: ", "" + responseArray.length);
+                    Log.d("# of matches: ","" + ((MainActivity)getActivity()).passwordSearcher(responseArray,pHash));
                     int j = ((MainActivity)getActivity()).passwordSearcher(responseArray,pHash);
                     if(j != -1) {
                         result1.setText("Leaked Online: " + j);
