@@ -33,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
         final Context context = this;
         tabs.setupWithViewPager(viewPager);
         fab = findViewById(R.id.fab);
+
+
+        //Floating action bar - interaction changes depending on which tab user is on
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,13 +70,8 @@ public class MainActivity extends AppCompatActivity {
                     AlertDialog alert11 = builder1.create();
                     alert11.show();
                 }
-
-
             }
         });
-
-
-
     }
 
     @Override
@@ -89,15 +87,15 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
+
+    //Method used to search user password input into retrieved response array, outputs -1 if not found, else amount of hits in the array
     public int passwordSearcher(String[] list, String hash) {
         String prefix = hash.substring(0,5);
         int i = -1;
@@ -107,12 +105,12 @@ public class MainActivity extends AppCompatActivity {
             if (checkHash.equalsIgnoreCase(hash)) {
                 //Log.d("Match!", "" + Integer.parseInt(fullHash.substring(fullHash.indexOf(":") + 1)));
                 return Integer.parseInt(fullHash.substring(fullHash.indexOf(":") + 1));
-
-
             }
         }
         return i;
         }
+
+        //Tab Navigation manager
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -152,6 +150,8 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
     }
+
+    //Hide virtual keyboard logic, used for when user enters email input etc
     public void hideKeyboard() {
         // Check if no view has focus:
         View view = MainActivity.this.getCurrentFocus();
@@ -161,9 +161,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+    //Generates tips based on hard coded input, generates Tip class Objects
     public ArrayList genTips() {
-
         ArrayList<Tip> tipList = new ArrayList<>();
         tipList.add(new Tip("Email Aliasing with the + Symbol", "<strong>Email, Tips</strong>", "<p>Gmail &amp; Outlook ignores anything after the plus character (<strong>+</strong>) allowing the text afterwards to be used for filtering and generating infinite amounts of alternate accounts which direct to the same inbox.</p>\n" +
                 "<p><em><strong>test+spam@gmail.com</strong>, <u><strong>test+123@gmail.com</strong></u></em><em>&nbsp;&amp;</em><strong>&nbsp;test+shopping@gmail.com</strong><em>&nbsp;will all be deliver to the mailbox <strong>test@gmail.com</strong></em></p>\n" +
@@ -220,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
                 "<p>Data leak matching provided by Pwned Passwords API</p>\n" +
                 "<p><br></p>"));
 
+        //Sorting ability for future development
         Collections.sort(tipList, new Comparator<Tip>() {
             @Override
             public int compare(Tip o1, Tip o2) {
