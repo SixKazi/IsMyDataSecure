@@ -8,11 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
+
+/*
+* Recycler View adapter for displaying Tip list on the Tips tab
+ */
 
 public class RecAdapter extends RecyclerView.Adapter<RecAdapter.RecViewHolder> {
 
