@@ -25,6 +25,11 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import com.nulabinc.zxcvbn.*;
 
+/*
+*
+*
+ */
+
 public class SecondFragment extends Fragment {
 
     public TextView result1;
