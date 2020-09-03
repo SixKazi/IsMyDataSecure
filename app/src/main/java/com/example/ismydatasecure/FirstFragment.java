@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -36,6 +35,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 /*
+* Logic for First Fragment - Email tab implementation
 *
 *
 * */
@@ -50,7 +50,6 @@ public class FirstFragment extends Fragment {
     String key = "53350b58873742d1b58ee5dda75cc6d6";
     EditText emailAddress;
     TextView warning;
-    Button help;
     Button getHelp;
     Button newSearch;
     Button share;
@@ -75,8 +74,9 @@ public class FirstFragment extends Fragment {
         warning = view.findViewById(R.id.result_warning);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-
         getHelp = view.findViewById(R.id.help_button);
+
+        //On new search click, shows results & share, reset button
         newSearch = view.findViewById(R.id.new_button);
         newSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +90,8 @@ public class FirstFragment extends Fragment {
                 warning.setTextColor(Color.BLACK);
             }
         });
+
+        //Call to action button logic
         secure = view.findViewById(R.id.help_button);
         secure.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +114,8 @@ public class FirstFragment extends Fragment {
                 alert11.show();
             }
         });
+
+        //Share intent
         share = view.findViewById(R.id.share);
         share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,9 +129,7 @@ public class FirstFragment extends Fragment {
             }
         });
         mWebsiteList = new ArrayList<>();
-
         mRequestQueue = Volley.newRequestQueue(this.getContext());
-
         emailAddress.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -138,6 +140,7 @@ public class FirstFragment extends Fragment {
             }
         });
 
+        //Check if valid email is entered, else display toast message
         buttonEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -174,9 +177,7 @@ public class FirstFragment extends Fragment {
                         String imageUrl = website.getString("LogoPath");
                         String date = website.getString("BreachDate");
                         String text = website.getString("Description");
-
                         mWebsiteList.add(new WebsiteItem(imageUrl,websiteTitle,pwnCount,date,text));
-
                     }
                     mWebsiteAdapter = new WebsiteAdapter(getContext(), mWebsiteList);
                     warning.setText(mWebsiteList.size() + " matches found. \n Act now to secure your data");
@@ -191,18 +192,13 @@ public class FirstFragment extends Fragment {
                             boolean expanded = mWebsiteList.get(position).isExpanded();
                             mWebsiteList.get(position).setExpanded(!expanded);
                             mWebsiteAdapter.notifyItemChanged(position);
-
                         }
                     });
-
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         }, new Response.ErrorListener() {
-
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
@@ -212,8 +208,6 @@ public class FirstFragment extends Fragment {
                 }
             }
         }){
-
-
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String>  params = new HashMap<String, String>();
@@ -223,11 +217,10 @@ public class FirstFragment extends Fragment {
                 return params;
             }
         };
-
         mRequestQueue.add(request);
     }
 
-
+    //Valid email method using Patterns library
     public static boolean isValidEmail(CharSequence target) {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
     }
