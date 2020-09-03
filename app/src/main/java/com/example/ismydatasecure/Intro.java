@@ -6,7 +6,10 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import com.github.appintro.AppIntro;
 import com.github.appintro.AppIntroFragment;
-
+/*
+* Intro panel code - library provided via github > appIntro
+*
+ */
 public class Intro extends AppIntro {
 
     @Override
